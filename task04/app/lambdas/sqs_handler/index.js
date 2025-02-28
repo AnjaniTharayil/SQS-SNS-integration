@@ -1,29 +1,13 @@
-// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: Apache-2.0
-// exports.handler = async (event, context) => {
-//   event.Records.forEach((record) => {
-//     const { body } = record;
-//     console.log(body);
-//     return body;
-//   });
-// };
+exports.handler = async (event) => {
+  console.log("Received SQS event:", JSON.stringify(event, null, 2));
 
-// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: Apache-2.0
-exports.handler = async (event, context) => {
-  for (const message of event.Records) {
-    await processMessageAsync(message);
-  }
-  console.info("done");
+  event.Records.forEach((record) => {
+    const { body } = record;
+    console.log("Message Body:", body);
+  });
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify("Messages processed successfully"),
+  };
 };
-
-async function processMessageAsync(message) {
-  try {
-    console.log(`Processed message ${message.body}`);
-    // TODO: Do interesting work based on the new message
-    await Promise.resolve(1); //Placeholder for actual async work
-  } catch (err) {
-    console.error("An error occurred");
-    throw err;
-  }
-}
