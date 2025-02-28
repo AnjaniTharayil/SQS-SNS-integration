@@ -41,5 +41,14 @@
       "sqs": "sqs_queue",
       "resource": "async_queue"
     }
+  },
+  "lambda_topic": {
+    "resource_type": "sns_topic",
+    "region": "eu-central-1",
+    "event_sources": [],
+    "tags": {
+      "sns": "sns_topic",
+      "resource": "lambda_topic"
+    }
   }
 }
